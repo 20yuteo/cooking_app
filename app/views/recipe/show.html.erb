@@ -1,0 +1,35 @@
+
+<div class="container">
+  <div class="row">
+    <div class="card col-md-4" style="width: 18rem; border: none;">
+      <div class="card-body">
+        </div>
+    </div>
+    <div class="card col-md-4" style="width: 18rem;">
+    <img src="<%= @recipe.r_image%>" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">タイトル　<%= @recipe.title%></h5>
+      <p class="card-text">材料　<%= @recipe.ingredient%></p>
+      <p class="card-text">作り方　<%= @recipe.how_to%></p>
+      <% user = User.find(@recipe.user_id)%>
+      <p class="card-text">制作者　<%= user.name%></p>
+      <% if session[:id] == @recipe.user_id%>
+      <a href="/recipe/edit/<%= @recipe.id%>" class="btn btn-primary">編集する</a>
+      <%= link_to("削除する", "/recipe/delete/#{@recipe.id}", {method: "delete", class: "btn btn-primary"})%>
+      <% else%>
+      <% if like = Like.find_by(user_id: session[:id], like_recipe_id: @recipe.id)%>
+      <%= link_to("お気に入り解除する！", "/recipe/dislike/#{@recipe.id}", {method: "delete", class: "btn btn-primary"})%>
+      <% else%>
+      <%= link_to("お気に入りする！", "/recipe/like/#{@recipe.id}", {method: "post", class: "btn btn-primary"})%>
+      <% end%>
+      <% end%>
+    </div>
+    </div>
+    
+    <div class="card col-md-4" style="width: 18rem; border: none;">
+    <div class="card-body">
+    </div>
+    </div>
+
+  </div>
+</div>

@@ -4,102 +4,73 @@
   <h2>
     料理投稿サイトです！
   </h2>
-
-  <%= link_to "いますぐサインアップ！", '#', class: "btn btn-lg btn-primary" %>
+  <% if session[:id] == nil%>
+  <%= link_to "Signup!", '/signup', class: "btn btn-lg btn-primary" %>
+  <%= link_to "Login!", '/login', class: "btn btn-lg btn-primary" %>
+  <% end%>
 </div>
 
 <div class="container">
   <div class="row">
+    
     <div class="card col-md-4" style="width: 18rem;">
-      <img src="/assets/dog.jpg" class="card-img-top" alt="...">
+      <% if @recipe%>
+      <% @recipe.each do |recipe|%>
+      <img src="<%= recipe.r_image%>" class="card-img-top" alt="...">
       <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <h5 class="card-title"><%= recipe.title%></h5>
+        <% user = User.find(recipe.user_id)%>
+        <p class="card-text"><%=user.name%>さんの投稿</p>
+        <a href="/recipe/show/<%= recipe.id%>" class="btn btn-primary">レシピを観る！</a>
         </div>
-    </div>
-    
-    <div class="card col-md-4" style="width: 18rem;">
-    <img src="/assets/dog.jpg" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
-    </div>
-    </div>
-    
-    <div class="card col-md-4" style="width: 18rem;">
-    <img src="/assets/dog.jpg" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
-    </div>
-    </div>
-
+        <% end%>
+        <% end%>
   </div>
+
+
+      <div class="card col-md-4" style="width: 18rem;">
+        <div>いいね！ランキング</div>
+        <div>第一位</div>
+        <div><%= @rank01%>いいね！</div>
+      <img src="<%= @rank_no1.r_image%>" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title"><%= @rank_no1.title%></h5>
+        <% user = User.find(@rank_no1.user_id)%>
+        <p class="card-text"><%=user.name%>さんの投稿</p>
+        <a href="/recipe/show/<%= @rank_no1.id%>" class="btn btn-primary">レシピを観る！</a>
+      </div>
+      
+      <div>第二位</div>
+      <div><%= @rank02%>いいね！</div>
+      <img src="<%= @rank_no2.r_image%>" class="card-img-top" alt="...">
+      <div class="card-body">
+        <% user = User.find(@rank_no2.user_id)%>
+        <p class="card-text"><%=user.name%>さんの投稿</p>
+        <a href="/recipe/show/<%= @rank_no2.id%>" class="btn btn-primary">レシピを観る！</a>
+      </div>
+
+      <div>第3位</div>
+      <div><%= @rank03%>いいね！</div>
+      <img src="<%= @rank_no3.r_image%>" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title"><%= @rank_no3.title%></h5>
+        <% user = User.find(@rank_no3.user_id)%>
+        <p class="card-text"><%=user.name%>さんの投稿</p>
+        <a href="/recipe/show/<%= @rank_no3.id%>" class="btn btn-primary">レシピを観る！</a>
+      </div>
+      </div>
+
+      <div class="card col-md-4" style="width: 18rem;">
+        <div><%= @kind_name%>特集</div>
+        <% @special_recipe.each do |special_recipe|%>
+      <img src="<%= special_recipe.r_image%>" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title"><%= special_recipe.title%></h5>
+        <% user = User.find(special_recipe.user_id)%>
+        <p class="card-text"><%=user.name%>さんの投稿</p>
+        <a href="/recipe/show/<%= special_recipe.id%>" class="btn btn-primary">レシピを観る！</a>
+        <% end%>
+        </div>
+        </div>
 </div>
-
-<div class="container">
-  <div class="row">
-    <div class="card col-md-4" style="width: 18rem;">
-      <img src="/assets/dog.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-    </div>
-    
-    <div class="card col-md-4" style="width: 18rem;">
-    <img src="/assets/dog.jpg" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
-    </div>
-    </div>
-    
-    <div class="card col-md-4" style="width: 18rem;">
-    <img src="/assets/dog.jpg" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
-    </div>
-    </div>
-
-  </div>
-</div>
-
-<div class="container">
-  <div class="row">
-    <div class="card col-md-4" style="width: 18rem;">
-      <img src="/assets/dog.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-    </div>
-    
-    <div class="card col-md-4" style="width: 18rem;">
-    <img src="/assets/dog.jpg" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
-    </div>
-    </div>
-    
-    <div class="card col-md-4" style="width: 18rem;">
-    <img src="/assets/dog.jpg" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
-    </div>
-    </div>
-
-  </div>
 </div>

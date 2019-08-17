@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="row">
+    <div class="card col-md-4" style="width: 18rem; border: 0;">
+      <div class="card-body">
+        </div>
+    </div>
+    
+    <div class="card col-md-4" style="width: 18rem;">
+      <% if @user.u_image%>
+        <img src="<%= @user.u_image%>" class="card-img-top" alt="...">
+        <% else%>
+    <img src="/assets/dog.jpg" class="card-img-top" alt="...">
+      <% end%>
+    <div class="card-body">
+
+      <%= form_for @user, url: {:action => 'update'} do |f|%>
+          <div class="form-group">
+            <%= label :name, :名前%>
+            <%= f.text_field :name, value: @user.name, class: "form-control"%>
+          </div>
+          <div class="form-group">
+            <%= label :password, :パスワード%>
+            <%= f.text_field :password, class: "form-control"%>
+          </div>
+          <div class="form-group">
+              <%= label :email, :メールアドレス%>
+              <%= f.text_field :email, class: "form-control"%>
+          </div>
+
+          <div class="form-group">
+             <%= label :u_image, :ユーザー画像%>
+             <%= f.file_field :u_image, class: "form-control"%>
+          </div>
+          <%= submit_tag "編集する"%>
+      <% end%>
+      
+    </div>
+    </div>
+    
+    <div class="card col-md-4" style="width: 18rem; border: 0;">
+    <div class="card-body">
+    </div>
+    </div>
+
+  </div>
+</div>
